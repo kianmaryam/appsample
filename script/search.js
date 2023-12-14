@@ -1,5 +1,6 @@
 // Update this variable to point to your domain.
-var apigatewayendpoint = "";
+var apigatewayendpoint =
+  "https://b0s2tpg4u4.execute-api.ca-central-1.amazonaws.com/test/search";
 var loadingdiv = $("#loading");
 var noresults = $("#noresults");
 var resultdiv = $("#results");
@@ -22,11 +23,13 @@ async function search() {
   // Only run a query if the string contains at least three characters
   if (query.length > 2) {
     // Make the HTTP request with the query as a parameter and wait for the JSON results
+
     let response = await $.get(
       apigatewayendpoint,
       { q: query, size: 25 },
       "json"
     );
+
     // Get the part of the JSON response that we care about
     let results = response["hits"]["hits"];
     if (results.length > 0) {
